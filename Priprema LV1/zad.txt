@@ -1,16 +1,56 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
+void gen_arr(float V[], int n, float dg, float gg);
+int sekv_pret(float V[], int n, float x );
+void insertion_sort(float V[], int n);
+int bin_pret(float V[], int n, float x);
+int main(){
+    int n = 10; // veličina niza
+    float V[n]; // niz pseudoslučajnih brojeva
+    float dg = 0, gg = 50; // donja i gornja granica
+    float x = 50; // traženi broj
+
+    // Inicijalizacija generatora pseudoslučajnih brojeva
+    srand(time(NULL));
+
+    // Generiranje pseudoslučajnih brojeva u nizu V
+    gen_arr(V, n, dg, gg);
+
+    // Ispis niza prije sortiranja
+    printf("Niz prije sortiranja: ");
+    for (int i = 0; i < n; i++) {
+        printf("%.2f ", V[i]);
+    }
+    printf("\n");
+   
+   //sekv pret
+    printf("%d\n", sekv_pret(V, n, x));
+
+    // Sortiranje niza uzlazno
+    insertion_sort(V, n);
+
+    // Ispis sortiranog niza
+    printf("Niz nakon sortiranja: ");
+    for (int i = 0; i < n; i++) {
+        printf("%.2f ", V[i]);
+        
+    }
+    //bin pret
+    printf("\n%d", bin_pret(V, n, x));
+
+return 0;
+}
 
 void gen_arr(float V[], int n, float dg, float gg) {
-    srand(time(NULL)); // Postavlja sjeme za generiranje slučajnih brojeva
+    srand(time(NULL)); 
 
     for (int i = 0; i < n; i++) {
-        V[i] = dg + ((float)rand() / RAND_MAX) * (gg - dg); // Računa vrijednost između dg i gg
+        V[i] = dg + ((float)rand() / RAND_MAX) * (gg - dg);
     }
 }
 
-a) int sekv_pret(float V[], int n, float x ){
+int sekv_pret(float V[], int n, float x ){
     for(int i = 0; i < n; i++){
         if(V[i] == x){
             return i;
@@ -19,7 +59,7 @@ a) int sekv_pret(float V[], int n, float x ){
     return -1;
 }
 
-b)void insertion_sort(float V[], int n){
+void insertion_sort(float V[], int n){
     int temp, i, j;
     for(i = 1; i < n; i++){
         temp = V[i];
@@ -32,7 +72,7 @@ b)void insertion_sort(float V[], int n){
     }
 }
 
-c) int bin_pret(float V[], int n, float x){
+int bin_pret(float V[], int n, float x){
     int donjaG = 0;
     int gornjaG = n-1;
     int sredina = 0;
